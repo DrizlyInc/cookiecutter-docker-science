@@ -63,7 +63,7 @@ export DATA_SOURCE={{ cookiecutter.data_source }}
 export JUPYTER_HOST_PORT={{ cookiecutter.jupyter_host_port }}
 export JUPYTER_CONTAINER_PORT=8888
 export PYTHON=python3
-
+export INTEGRATIONS_DIR={{ cookiecutter.integrations_directory }}
 ###########################################################################################################
 ## ADD TARGETS SPECIFIC TO "{{ cookiecutter.project_name }}"
 ###########################################################################################################
@@ -105,7 +105,7 @@ sync-to-source: ## sync local data to data source
 {% endif %}
 
 create-container: ## create docker container
-	$(DOCKER) run -it -v $(PWD):/work -v {{ cookiecutter.integrations_directory }}:/work/integrations -v $(HOME)/.aws/:/home/docker/.aws/ -p $(JUPYTER_HOST_PORT):$(JUPYTER_CONTAINER_PORT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	$(DOCKER) run -it -v $(PWD):/work -v $(INTEGRATIONS_DIR):/work/integrations -v $(HOME)/.aws/:/home/docker/.aws/ -p $(JUPYTER_HOST_PORT):$(JUPYTER_CONTAINER_PORT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 start-container: ## start docker container
 	@echo "$$START_DOCKER_CONTAINER" | $(SHELL)
