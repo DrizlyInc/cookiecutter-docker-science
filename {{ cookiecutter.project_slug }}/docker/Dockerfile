@@ -1,7 +1,5 @@
 FROM {{cookiecutter.python_docker_image}}
 
-RUN pip3 install --upgrade pip
-
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
