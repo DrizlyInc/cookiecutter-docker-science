@@ -63,7 +63,7 @@ Then the cookiecutter command ask for several questions on generated project as 
 
 ::
 
-    $cookiecutter git@github.com:docker-science/cookiecutter-docker-science.git
+    $cookiecutter git@github.com:DrizlyInc/cookiecutter-docker-science.git
     project_name [project_name]: food-image-classification
     project_slug [food_image_classification]:
     jupyter_host_port [8888]:

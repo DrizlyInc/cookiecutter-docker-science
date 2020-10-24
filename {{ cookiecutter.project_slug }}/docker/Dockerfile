@@ -1,14 +1,4 @@
-{%- if cookiecutter.use_nvidia_docker == 'yes' -%}
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-{%- else -%}
-FROM ubuntu:18.04
-{%- endif %}
-
-RUN apt-get update && apt-get install -y \
-  git \
-  python3.6 \
-  python3-pip \
-  python3.6-dev
+FROM {{cookiecutter.python_docker_image}}
 
 RUN pip3 install --upgrade pip
 
