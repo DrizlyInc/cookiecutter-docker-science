@@ -45,11 +45,8 @@ endef
 ## VARIABLES
 ###########################################################################################################
 
-{%- if cookiecutter.use_nvidia_docker == 'yes' %}
-export DOCKER=nvidia-docker
-{%- else %}
+
 export DOCKER=docker
-{%- endif %}
 export TARGET=
 export PWD=`pwd`
 export PRINT_HELP_PYSCRIPT
