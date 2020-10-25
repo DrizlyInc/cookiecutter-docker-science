@@ -33,6 +33,8 @@ Generated Docker container mounts the project directory to ``/work`` of the cont
 when you can edit the files in the host environment with your favorite editor
 such as Vim, Emacs, Atom or PyCharm. The changes in host environment are reflected in the Docker container environment.
 
+If you want to test out a new package or figure out how to configure things. Run them within the container following a `make create-container` or `make start-container` Any of these installs will be deleted if you delete teh container, so if you want them to persist you should add them to the requirements file. 
+
 ### Update dependencies
 
 When we need to add libraries in `Dockerfile` or `requirements.txt`
@@ -72,8 +74,11 @@ When you see the status of Docker container, please run `make profile` in host m
 
 ### Use Jupyter Notebook
 
-To launch Jupyter Notebook, please run `make jupyter` in the Docker container. After launch the Jupyter Notebook, you can
+To launch Jupyter Notebook, please run `make jupyter-start` in the Docker container. After launch the Jupyter Notebook, you can
 access the Jupyter Notebook service in http://localhost:{{ cookiecutter.jupyter_host_port }}.
+
+You will need to put in the token the first time the server is run each container start up (following a make start or make create).
+After that, you can set a password on the prompt page and login with that while the container is running.
 
 ### Run formatter
 When you format project's codes, please run `make format`.

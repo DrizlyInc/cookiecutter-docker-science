@@ -6,5 +6,4 @@
     "data_source_type": ["None","s3", "nfs", "url"],
     "data_source": "Please Input data source",
     "python_docker_image": "Please input a docker image that contains the version of python you want",
-    "integrations_directory": "$(PWD)/../../integrations"
 }

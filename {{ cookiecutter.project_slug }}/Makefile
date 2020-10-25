@@ -112,8 +112,11 @@ start-container: ## start docker container
 	@echo "Launched $(CONTAINER_NAME)..."
 	$(DOCKER) attach $(CONTAINER_NAME)
 
-jupyter: ## start Jupyter Notebook server
-	jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT}
+jupyter-start: ## start Jupyter Notebook server
+	$(DOCKER) exec $(CONTAINER_NAME) jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT}
+
+jupyter-stop:
+	$(DOCKER) exec $(CONTAINER_NAME) jupyter-notebook stop
 
 test: ## run test cases in tests directory
 	$(PYTHON) -m unittest discover

@@ -17,6 +17,9 @@ RUN mkdir -p -m 0700 ~/.ssh
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 RUN --mount=type=ssh,mode=0666  pip install git+ssh://git@github.com/DrizlyInc/drizly-dagster.git@ds_js/margin-optimized-sort-skeleton"#egg=integrations"
 
+COPY ./requirements_dev.txt /requirements_dev.txt
+RUN pip install -r /requirements_dev.txt
+
 WORKDIR /work
 
 ENTRYPOINT ["/bin/bash"]
