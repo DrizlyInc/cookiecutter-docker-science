@@ -5,6 +5,7 @@
 ## Requirements
 
 * [Docker version 17 or later](https://docs.docker.com/install/#support)
+* Setup your ssh agent to connect to github: https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh
 
 ## Setup development environment
 

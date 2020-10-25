@@ -1,8 +1,0 @@
-matplotlib
-jupyter
-notebook
-Sphinx
-flake8
-boto3
-sqlalchemy
-snowflake-sqlalchemy
