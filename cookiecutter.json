@@ -5,5 +5,5 @@
     "description": "Please Input a short description",
     "data_source_type": ["None","s3", "nfs", "url"],
     "data_source": "Please Input data source",
-    "python_docker_image": "Please input a docker image that contains the version of python you want",
+    "python_docker_image": "Please input a docker image that contains the version of python you want"
 }
