@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 FROM {{cookiecutter.project_slug}}-image-base
 
 #This is all to port over the integrations from the drizly-dagster project
