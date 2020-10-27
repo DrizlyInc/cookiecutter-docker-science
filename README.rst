@@ -60,7 +60,10 @@ To generate project from the cookiecutter-docker-science template, please run th
 ``$cookiecutter gh:DrizlyInc/cookiecutter-docker-science``
 
 Then the cookiecutter command ask for several questions on generated project as follows.
-**TODO: FIX ALL OF THIS**
+
+**TODO: Update the following flows with the new template**
+**TODO: Update the directory sturcutre **
+**TODO: Update the makefile targets **
 ::
 
     $cookiecutter git@github.com:DrizlyInc/cookiecutter-docker-science.git
