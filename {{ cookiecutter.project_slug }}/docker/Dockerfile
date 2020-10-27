@@ -3,10 +3,10 @@ FROM {{cookiecutter.python_docker_image}}
 RUN apt-get update
 RUN apt-get install openssh-client git -y
 RUN apt-get install build-essential -y
-COPY ./requirements.txt /requirements.txt
+RUN apt-get install -yqq cron
+
+COPY requirements.txt ./
 RUN pip install -r /requirements.txt
-
-
 
 ARG UID
 RUN useradd docker -l -u $UID -s /bin/bash -m

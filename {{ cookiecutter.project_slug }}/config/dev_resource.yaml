@@ -1,0 +1,12 @@
+resources:
+  snowflake:
+    config:
+      secret_name: snowflake/analytics_api
+      region_name: us-east-1
+  s3:
+    config:
+      bucket: drizly-ml
+      project_path: dev/{{cookiecutter.project_slug}}/
+job_configuration:
+  training:
+    output_directory: /opt/ml/model
