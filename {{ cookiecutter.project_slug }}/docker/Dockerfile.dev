@@ -21,8 +21,8 @@ RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 #If the requirements install this is unnecessary
 RUN --mount=type=ssh,mode=0666  pip install git+ssh://git@github.com/DrizlyInc/drizly-dagster.git@BIK-2612-Isolated"#egg=drizly_dagster_utils"
 
-COPY ./requirements_dev.txt /requirements_dev.txt
-RUN pip install -r /requirements_dev.txt
+COPY ./dev_requirements.txt /dev_requirements.txt
+RUN pip install -r /dev_requirements.txt
 
 WORKDIR /work
 
