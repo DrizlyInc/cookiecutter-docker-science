@@ -77,6 +77,7 @@ help: ## show this message
 
 init: init-docker sync-from-source ## initialize repository for traning
 
+##TODO: Rewrite the aws s3 because the awscli doesn't play nice with boto3 right now
 sync-from-source: ## download data data source to local envrionment
 {%- if cookiecutter.data_source_type == 's3' %}
 	-aws s3 sync $(DATA_SOURCE) ./data/

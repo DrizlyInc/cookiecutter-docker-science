@@ -1,9 +1,11 @@
 """Modes"""
 from dagster import ModeDefinition
 
-from drizly_dagster_utils.utils.resources import mock_s3, s3, mock_climacell, climacell
+from drizly_dagster_utils.utils.resources import mock_s3, s3
 from drizly_dagster_utils.utils.slack_logger import json_console_logger
 
+#TODO: Write up a howto for this portion.
+#TODO: Make a decision about the logger
 
 local_mode = ModeDefinition(
     name="local",

@@ -1,0 +1,10 @@
+boto3
+click
+black
+jupyter
+Sphinx
+flake8
+snowflake-sqlalchemy
+pandas
+sklearn
+python-box

@@ -1,26 +1,13 @@
 # syntax=docker/dockerfile:experimental
 FROM {{cookiecutter.project_slug}}-image-base
 
-# This is all to port over the integrations from the drizly-dagster project
-# for simplicity when switching from development to dagster
-RUN pip install --use-feature=2020-resolver awscli
-RUN pip install --use-feature=2020-resolver click
-RUN pip install --use-feature=2020-resolver black
-RUN pip install --use-feature=2020-resolver jupyter
-RUN pip install --use-feature=2020-resolver Sphinx
-RUN pip install --use-feature=2020-resolver flake8
-RUN pip install --use-feature=2020-resolver snowflake-sqlalchemy
-RUN pip install --use-feature=2020-resolver pandas
-RUN pip install --use-feature=2020-resolver sklearn
-RUN pip install --use-feature=2020-resolver python-box
+COPY ./dev_requirements.txt /dev_requirements.txt
+RUN pip install --use-feature=2020-resolver -r  /dev_requirements.txt
 
 #This exists in order to do a pip install of drizly_dagster_utils wherever needed
 RUN mkdir -p -m 0700 ~/.ssh
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 RUN --mount=type=ssh,mode=0666  pip install git+ssh://git@github.com/DrizlyInc/drizly-dagster.git@ds_js/margin-optimized-sort-skeleton"#egg=integrations&subdirectory=drizly_dagster_utils"
-
-COPY ./dev_requirements.txt /dev_requirements.txt
-RUN pip install -r /dev_requirements.txt
 
 WORKDIR /work
 

@@ -1,9 +1,9 @@
 """Presets"""
 from dagster import PresetDefinition
 
-from repos.etls.climacell.environments.local_run_config import local_run_config
-from repos.etls.climacell.environments.dev_run_config import dev_run_config
-from repos.etls.climacell.environments.prod_run_config import prod_run_config
+from repos.datascience.{{cookiecutter.project_slug }}.environments.local_run_config import local_run_config
+from repos.datascience.{{cookiecutter.project_slug }}.environments.dev_run_config import dev_run_config
+from repos.datascience.{{cookiecutter.project_slug }}.environments.prod_run_config import prod_run_config
 
 
 local = PresetDefinition(

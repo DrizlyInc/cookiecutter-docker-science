@@ -1,7 +1,5 @@
 *~
-.idea
 *.iml
 .tox
 .pytest_cache
-__pycache__
-.DS_Store
+__pycache_
