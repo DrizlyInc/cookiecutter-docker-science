@@ -7,6 +7,12 @@ RUN apt-get install openssh-client git -y
 RUN apt-get install build-essential -y
 RUN apt-get install -yqq cron
 
+ARG UID
+RUN useradd docker -l -u $UID -s /bin/bash -m
+USER docker
+
+ENV PATH=$PATH:/home/docker/.local/bin
+
 COPY ./dev_requirements.txt /dev_requirements.txt
 RUN pip install --use-feature=2020-resolver -r  /dev_requirements.txt
 
