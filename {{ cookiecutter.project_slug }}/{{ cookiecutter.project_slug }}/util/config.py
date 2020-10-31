@@ -5,4 +5,5 @@ import os
 env = os.environ.get('ENV')
 # dev, local, or prod
 with open(f"../../config/{env}_resource.yaml", "r") as ymlfile:
-  resource_config = Box(yaml.safe_load(ymlfile))
+  cfg = Box(yaml.safe_load(ymlfile))
+

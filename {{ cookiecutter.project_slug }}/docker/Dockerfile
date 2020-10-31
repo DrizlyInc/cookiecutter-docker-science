@@ -1,10 +1,5 @@
 FROM {{cookiecutter.python_docker_image}}
 #If you are using a non-debian distribution you may have to change apt-get
-RUN apt-get update
-# Needed for drizly_dagster_utils install
-RUN apt-get install openssh-client git -y
-RUN apt-get install build-essential -y
-RUN apt-get install -yqq cron
 
 COPY requirements.txt ./
 RUN pip install -r /requirements.txt

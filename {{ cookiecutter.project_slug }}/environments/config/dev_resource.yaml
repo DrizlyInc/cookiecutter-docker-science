@@ -6,7 +6,9 @@ resources:
   s3:
     config:
       bucket: drizly-ml
-      project_path: dev/{{cookiecutter.project_slug}}/
-job_configuration:
-  training:
-    output_directory: /opt/ml/model
+    {{cookiecutter.project_slug}}:
+      key_path: dev/{{cookiecutter.project_slug}}/
+model:
+  train_output: /opt/ml/model
+  model_name: {{cookiecutter.project_slug}}Model.pkl
+
