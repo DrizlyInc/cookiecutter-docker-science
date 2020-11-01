@@ -18,7 +18,8 @@ USER docker
 COPY ./dev_requirements.txt /dev_requirements.txt
 RUN pip install --use-feature=2020-resolver -r  /dev_requirements.txt
 
-
 WORKDIR /work
+
+RUN pip install -e .
 
 ENTRYPOINT ["/bin/bash"]
