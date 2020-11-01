@@ -20,6 +20,6 @@ RUN pip install --use-feature=2020-resolver -r  /dev_requirements.txt
 
 WORKDIR /work
 
-RUN pip install -e .
+#RUN pip install -e .
 
 ENTRYPOINT ["/bin/bash"]

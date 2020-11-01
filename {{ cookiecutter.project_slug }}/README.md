@@ -26,6 +26,10 @@ you run the following command.
 
 This section shows how we develop with the created Docker container.
 
+### Drizly specific
+
+If you want to use code that you wrote in the {{cookiecutter.project_slug}} directory (if you wanted to use the model or custom scorer you wrote there for instance) you can run pip install -e . and it will load your modules. You will have to restart your python kernel to see the change. 
+
 ### Edit source code
 
 Most of the source codes of this project, `{{ cookiecutter.project_name }}` are stored in the `{{ cookiecutter.project_slug }}` directory.

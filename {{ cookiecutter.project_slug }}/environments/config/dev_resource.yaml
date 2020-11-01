@@ -11,4 +11,3 @@ resources:
 model:
   train_output: /opt/ml/model
   model_name: {{cookiecutter.project_slug}}Model.pkl
-
