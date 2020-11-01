@@ -1,3 +1,4 @@
+pyyaml
 click
 black
 jupyter
