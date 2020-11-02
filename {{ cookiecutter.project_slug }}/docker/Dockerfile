@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 FROM {{cookiecutter.python_docker_image}}
 
 COPY requirements.txt ./

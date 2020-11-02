@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:experimental
 FROM {{cookiecutter.project_slug}}-image-base
 
 COPY ./dev_requirements.txt /dev_requirements.txt
