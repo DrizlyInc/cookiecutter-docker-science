@@ -1,5 +1,5 @@
 from drizly_dagster_utils.integrations.snowflake import SnowflakeConn
-from drizly_dagster_utils.intergrations.mysql import MySQLConn
+from drizly_dagster_utils.integrations.mysql import MySQLConn
 import pandas as pd
 from {{cookiecutter.project_slug}}.util.config import cfg
 
@@ -11,7 +11,9 @@ def snowflake_execute_query(sql):
 
 def snowflake_dataframe_from_sql(sql):
     result = snowflake_execute_query(sql)
-    return pd.DataFrame(result)
+    df = pd.DataFrame(result)
+    df.columns = result.keys()
+    return df
 
 def mysql_execute_query(sql):
     secret_name = cfg.resources.mysql.config.secret_name
@@ -20,5 +22,7 @@ def mysql_execute_query(sql):
     return connection.execute_query(sql)
 
 def mysql_dataframe_from_sql(sql):
-    result = snowflake_execute_query(sql)
-    return pd.DataFrame(result)
+    result = mysql_execute_query(sql)
+    df = pd.DataFrame(result)
+    df.columns = result.keys()
+    return df
