@@ -1,4 +1,5 @@
-from drizly_dagster_utils.integrations.snowflake import SnowflakeConn, MySQLConn, s3
+from drizly_dagster_utils.integrations.snowflake import SnowflakeConn
+from drizly_dagster_utils.intergrations.mysql import MySQLConn
 import pandas as pd
 from {{cookiecutter.project_slug}}.util.config import cfg
 

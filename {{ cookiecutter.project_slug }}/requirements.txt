@@ -1,0 +1,13 @@
+pyyaml
+click
+black
+jupyter
+qgrid
+Sphinx
+flake8
+snowflake-sqlalchemy
+pandas
+sklearn
+python-box
+matplotlib
+pandas_profiling[notebook]

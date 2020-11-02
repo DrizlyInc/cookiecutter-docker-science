@@ -2,11 +2,14 @@
 FROM {{cookiecutter.project_slug}}-image-base
 
 USER root
+RUN echo "root:root" | chpasswd
 RUN apt-get update
 # Needed for drizly_dagster_utils install
 RUN apt-get install openssh-client git -y
 RUN apt-get install build-essential -y
 RUN apt-get install -yqq cron
+RUN apt-get install sudo
+RUN echo "docker:docker" | chpasswd && adduser docker sudo
 
 #This exists in order to do a pip install of drizly_dagster_utils wherever needed
 RUN mkdir -p -m 0700 ~/.ssh
@@ -18,8 +21,10 @@ USER docker
 COPY ./dev_requirements.txt /dev_requirements.txt
 RUN pip install --use-feature=2020-resolver -r  /dev_requirements.txt
 
+RUN chmod +x /usr/local/etc/jupyter/nbconfig/
+
+# This is to install local source code for use in notebooks
 WORKDIR /work
+COPY ./init.sh .
 
-#RUN pip install -e .
-
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "./init.sh"]
