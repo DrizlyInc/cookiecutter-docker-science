@@ -88,12 +88,12 @@ sync-from-source: ## download data data source to local envrionment
 {% endif %}
 
 init-docker: ## initialize docker image
-	$(DOCKER) build --ssh default -t $(BASE_IMAGE_NAME) -f $(BASE_DOCKERFILE) --build-arg UID=$(shell id -u) .
-	DOCKER_BUILDKIT=1 $(DOCKER) build --ssh default -t $(IMAGE_NAME) -f $(DOCKERFILE) .
+	DOCKER_BUILDKIT=1 $(DOCKER) build --ssh default -t $(BASE_IMAGE_NAME) -f $(BASE_DOCKERFILE) --build-arg UID=$(shell id -u) .
+	$(DOCKER) build --ssh default -t $(IMAGE_NAME) -f $(DOCKERFILE) .
 
 init-docker-no-cache: ## initialize docker image without cache
-	$(DOCKER) build --no-cache --ssh default -t $(BASE_IMAGE_NAME) -f $(BASE_DOCKERFILE) --build-arg UID=$(shell id -u) .
-	DOCKER_BUILDKIT=1 $(DOCKER) build --no-cache --ssh default -t $(IMAGE_NAME) -f $(DOCKERFILE) .
+	DOCKER_BUILDKIT=1 $(DOCKER) build --no-cache --ssh default -t $(BASE_IMAGE_NAME) -f $(BASE_DOCKERFILE) --build-arg UID=$(shell id -u) .
+	$(DOCKER) build --no-cache --ssh default -t $(IMAGE_NAME) -f $(DOCKERFILE) .
 
 sync-to-source: ## sync local data to data source
 {%- if cookiecutter.data_source_type == 's3' %}
