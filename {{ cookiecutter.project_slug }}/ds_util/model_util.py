@@ -1,7 +1,7 @@
 from sklearn.externals import joblib
 from sklearn.base import BaseEstimator
 from drizly_dagster_utils.integrations.s3 import S3
-from {{cookiecutter.project_slug}}.ds_util.config import cfg
+from ds_util.config import cfg
 
 
 def save_model(model: BaseEstimator,) -> None:
