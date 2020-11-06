@@ -28,16 +28,15 @@ This section shows how we develop with the created Docker container.
 
 ### Drizly specific
 
-If you want to use code that you wrote in the {{cookiecutter.project_slug}} directory (if you wanted to use the model or custom scorer you wrote there for instance) you can run pip install -e . and it will load your modules. You will have to restart your python kernel to see the change. 
-
+Your project specific code goes in the 
 ### Edit source code
 
-Most of the source codes of this project, `{{ cookiecutter.project_name }}` are stored in the `{{ cookiecutter.project_slug }}` directory.
+Most of the source code of this project, `{{ cookiecutter.project_name }}` are stored in the `{{ cookiecutter.project_slug }}` directory.
 Generated Docker container mounts the project directory to ``/work`` of the container and therefore
 when you can edit the files in the host environment with your favorite editor
 such as Vim, Emacs, Atom or PyCharm. The changes in host environment are reflected in the Docker container environment.
 
-If you want to test out a new package or figure out how to configure things. Run them within the container following a `make create-container` or `make start-container` Any of these installs will be deleted if you delete teh container, so if you want them to persist you should add them to the requirements file. 
+If you want to test out a new package or figure out how to configure things. Run them within the container following a `make create-container` or `make start-container` Any of these installs will be deleted if you delete the container, so if you want them to persist you should add them to the requirements file. 
 
 ### Update dependencies
 

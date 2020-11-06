@@ -2,13 +2,14 @@ resources:
   snowflake:
     config:
       secret_name: snowflake/analytics_api
-      region_name: us-east-1
-  s3:
+      region: us-east-1
+  redis:
     config:
-      bucket: drizly-ml
-    {{cookiecutter.project_slug}}:
-      key_path: prod/{{cookiecutter.project_slug}}/
-model:
-  train_output: /opt/ml/model
-  model_name: {{cookiecutter.project_slug}}Model.pkl
-
+      host: TODO
+      port: 6379
+      db: "0"
+solids:
+  get_because_you_bought_df:
+    inputs:
+      query:
+        value: SELECT * FROM PROD.DATASCIENCE.{{cookiecutter.project_slug}}

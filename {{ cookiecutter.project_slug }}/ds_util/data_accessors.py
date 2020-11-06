@@ -1,7 +1,7 @@
 from drizly_dagster_utils.integrations.snowflake import SnowflakeConn
 from drizly_dagster_utils.integrations.mysql import MySQLConn
 import pandas as pd
-from {{cookiecutter.project_slug}}.util.config import cfg
+from {{cookiecutter.project_slug}}.ds_util.config import cfg
 
 def snowflake_execute_query(sql):
     secret_name = cfg.resources.snowflake.config.secret_name
