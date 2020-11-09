@@ -25,7 +25,7 @@ def get_{{cookiecutter.project_slug}}_list(context, query: String) -> List:
 
 
 @solid(required_resource_keys={"redis"})
-def write_recs_to_redis(context, {{cookiecutter.project_slug}}_list: List) -> None:
+def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project_slug}}_list: List) -> None:
     """Load Snowflake Data"""
     context.resources.redis.write_iter_to_redis({{cookiecutter.project_slug}}_list)
 
