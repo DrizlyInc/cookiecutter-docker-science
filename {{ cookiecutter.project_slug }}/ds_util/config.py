@@ -13,8 +13,8 @@ def get_project_root() -> Path:
 
 # You can import cfg from this module ala from config import cfg and access it anywhere
 # in the project
-with open(get_project_root().joinpath(f"environments/config/{env}_resource.yaml"), "r") as ymlfile:
-    cfg = Box(yaml.safe_load(ymlfile))
+# with open(get_project_root().joinpath(f"environments/config/{env}_resource.yaml"), "r") as ymlfile:
+#     cfg = Box(yaml.safe_load(ymlfile))
 
 with open(get_project_root().joinpath(f"environments/config/local_resource.yaml"), "r") as ymlfile:
     local_cfg = Box(yaml.safe_load(ymlfile))
@@ -24,3 +24,6 @@ with open(get_project_root().joinpath(f"environments/config/dev_resource.yaml"),
 
 with open(get_project_root().joinpath(f"environments/config/prod_resource.yaml"), "r") as ymlfile:
     prod_cfg = Box(yaml.safe_load(ymlfile))
+
+with open(get_project_root().joinpath(f"environments/config/test_resource.yaml"), "r") as ymlfile:
+    test_cfg = Box(yaml.safe_load(ymlfile))

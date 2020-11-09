@@ -9,7 +9,7 @@ resources:
       port: 6379
       db: "0"
 solids:
-  get_because_you_bought_df:
+  get_{{cookiecutter.project_slug}}_list:
     inputs:
       query:
-        value: SELECT * FROM PROD.DATASCIENCE.{{cookiecutter.project_slug}}
+        value: SELECT key, value FROM PROD.DATASCIENCE.{{cookiecutter.project_slug}}

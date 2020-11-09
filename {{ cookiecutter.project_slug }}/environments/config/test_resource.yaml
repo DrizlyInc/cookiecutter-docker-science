@@ -1,13 +1,7 @@
 resources:
   snowflake:
     config:
-      secret_name: snowflake/analytics_api
-      region: us-east-1
-  redis:
-    config:
-      host: development-recs-redis.dgvvsn.0001.use1.cache.amazonaws.com
-      port: 6379
-      db: "0"
+      file_path: test.csv
 solids:
   get_{{cookiecutter.project_slug}}_list:
     inputs:

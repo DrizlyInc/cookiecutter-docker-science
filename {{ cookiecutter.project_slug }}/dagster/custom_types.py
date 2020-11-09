@@ -1,8 +1,7 @@
 """Supplier Custom Types"""
-from dagster_pandas import create_dagster_pandas_dataframe_type, PandasColumn
+from dagster_pandas import PandasColumn, create_dagster_pandas_dataframe_type
 
-#TODO: Rewrite this for your dataframe(s)
-{{cookiecutter.project_slug}}DataframeType = create_dagster_pandas_dataframe_type(
+{{cookiecutter.project_slug}} = create_dagster_pandas_dataframe_type(
     name="{{cookiecutter.project_slug}}",
     columns=[
         PandasColumn("user_id"),
@@ -12,7 +11,5 @@ from dagster_pandas import create_dagster_pandas_dataframe_type, PandasColumn
         PandasColumn("volume_rk"),
         PandasColumn("recency_rk"),
         PandasColumn("recommendation_rk"),
-
     ],
 )
-

@@ -1,40 +1,47 @@
+import random
 
-from dagster import pipeline, execute_pipeline
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.custom_types import {{cookiecutter.project_slug}}DataframeType
-import pandas as pd
-from dagster import (
-    pipeline,
-    solid,
-    String,
+from dagster import List, String, execute_pipeline, pipeline, solid
+from repos.datascience.{{cookiecutter.project_slug}}.dagster.modes import (
+    dev_mode,
+    local_mode,
+    prod_mode,
+    test_mode,
 )
-
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.modes import local_mode, dev_mode, prod_mode
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.presets import local, dev, prod
+from repos.datascience.{{cookiecutter.project_slug}}.dagster.presets import (
+    dev,
+    local,
+    prod,
+    test,
+)
 
 
 @solid(required_resource_keys={"snowflake"})
-def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutter.project_slug}}DataframeType:
+def get_{{cookiecutter.project_slug}}_list(context, query: String) -> List:
     """Load Snowflake Data"""
-    result = context.resources.snowflake.execute_query(query)
-    context.log.info(type(result))
-    df = pd.DataFrame(result)
-    df.columns = result.keys()
-    context.log.info(df.sample(n=10).to_string())
-    return df
+    {{cookiecutter.project_slug}}_list = context.resources.snowflake.execute_query(query)
+    sample_size = min(len({{cookiecutter.project_slug}}_list), 10)
+    context.log.info(str(random.sample({{cookiecutter.project_slug}}_list, sample_size)))
+    return {{cookiecutter.project_slug}}_list
+
+
+@solid(required_resource_keys={"redis"})
+def write_recs_to_redis(context, {{cookiecutter.project_slug}}_list: List) -> None:
+    """Load Snowflake Data"""
+    context.resources.redis.write_iter_to_redis({{cookiecutter.project_slug}}_list)
 
 
 @pipeline(
-    mode_defs=[local_mode, dev_mode, prod_mode],
-    preset_defs=[local, dev, prod],
+    mode_defs=[local_mode, dev_mode, prod_mode, test_mode],
+    preset_defs=[local, dev, prod, test],
     tags={"type": "datascience"},
 )
+def {{cookiecutter.project_slug}}_to_redis_pipeline():
+    {{cookiecutter.project_slug}}_list = get_{{cookiecutter.project_slug}}_list()
+    write_recs_to_redis({{cookiecutter.project_slug}}_list)
 
-def {{cookiecutter.project_slug}}_pipeline():
-    {{cookiecutter.project_slug}}_df = get_{{cookiecutter.project_slug}}_df()
 
-
-def test_{{cookiecutter.project_slug}}_pipeline():
-    res = execute_pipeline({{cookiecutter.project_slug}}_pipeline)
+def test_{{cookiecutter.project_slug}}_to_redis_pipeline():
+    res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline)
     assert res.success
     assert len(res.solid_result_list) == 4
     for solid_res in res.solid_result_list:
