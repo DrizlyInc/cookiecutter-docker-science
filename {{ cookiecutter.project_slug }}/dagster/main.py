@@ -37,7 +37,7 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 )
 def {{cookiecutter.project_slug}}_to_redis_pipeline():
     {{cookiecutter.project_slug}}_list = get_{{cookiecutter.project_slug}}_list()
-    write_recs_to_redis({{cookiecutter.project_slug}}_list)
+    write_{{cookiecutter.project_slug}}_to_redis({{cookiecutter.project_slug}}_list)
 
 
 def test_{{cookiecutter.project_slug}}_to_redis_pipeline():
