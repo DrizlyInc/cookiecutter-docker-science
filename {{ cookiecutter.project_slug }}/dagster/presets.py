@@ -1,6 +1,6 @@
 """Presets"""
 from dagster import PresetDefinition
-from ds_util.config import dev_cfg, local_cfg, prod_cfg, test_cfg
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import dev_cfg, local_cfg, prod_cfg, test_cfg
 
 local = PresetDefinition(
     name="local",

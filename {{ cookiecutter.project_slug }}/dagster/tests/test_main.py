@@ -3,22 +3,22 @@ import unittest
 
 import pytest
 from dagster import execute_pipeline, execute_solid
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.main import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.main import (
     get_{{cookiecutter.project_slug}}_list,
     write_{{cookiecutter.project_slug}}_to_redis,
 )
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.modes import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
     dev_mode,
     local_mode,
     test_mode,
 )
-from repos.datascience.{{cookiecutter.project_slug}}.ds_util.config import test_cfg
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import test_cfg
 
 
 class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     """Test Supplier Forecast"""
 
-    @pytest.mark.datascience
+    @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_get_because_you_bought_list(self):
         """Store order items"""
         result = execute_solid(
@@ -29,7 +29,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         )
         self.assertTrue(result)
 
-    @pytest.mark.datascience
+    @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_write_{{cookiecutter.project_slug}}_to_redis(self):
         """Test subcategory forecast"""
         records = [

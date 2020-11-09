@@ -1,13 +1,13 @@
 import random
 
 from dagster import List, String, execute_pipeline, pipeline, solid
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.modes import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
     dev_mode,
     local_mode,
     prod_mode,
     test_mode,
 )
-from repos.datascience.{{cookiecutter.project_slug}}.dagster.presets import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.presets import (
     dev,
     local,
     prod,
@@ -33,7 +33,7 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 @pipeline(
     mode_defs=[local_mode, dev_mode, prod_mode, test_mode],
     preset_defs=[local, dev, prod, test],
-    tags={"type": "datascience"},
+    tags={"type": "{{cookiecutter.dagster_repo}}"},
 )
 def {{cookiecutter.project_slug}}_to_redis_pipeline():
     {{cookiecutter.project_slug}}_list = get_{{cookiecutter.project_slug}}_list()

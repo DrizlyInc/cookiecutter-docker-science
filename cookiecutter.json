@@ -1,6 +1,7 @@
 {
     "project_name": "project_name",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "dagster_repo": "datascience",
     "description": "Please Input a short description",
     "python_docker_image": "python:3.7.9-slim-buster",
     "jupyter_host_port": "8888",
