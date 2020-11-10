@@ -2,8 +2,3 @@ resources:
   snowflake:
     config:
       file_path: test.csv
-solids:
-  get_{{cookiecutter.project_slug}}_list:
-    inputs:
-      query:
-        value: SELECT * FROM STAGE_JS.DATASCIENCE.{{cookiecutter.project_slug}} LIMIT 100000
