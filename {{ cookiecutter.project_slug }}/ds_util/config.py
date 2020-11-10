@@ -27,3 +27,7 @@ with open(get_project_root().joinpath(f"environments/config/prod_resource.yaml")
 
 with open(get_project_root().joinpath(f"environments/config/test_resource.yaml"), "r") as ymlfile:
     test_cfg = Box(yaml.safe_load(ymlfile))
+    file_path = test_cfg.resources.snowflake.config.file_path
+    test_cfg.resources.snowflake.config.file_path = (
+        get_project_root().joinpath(f"dagster/tests/{file_path}").as_posix()
+    )
