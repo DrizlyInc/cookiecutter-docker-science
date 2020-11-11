@@ -3,15 +3,15 @@ import pandas as pd
 from dagster import String, pipeline, solid
 from dagster_ge.factory import ge_validation_solid_factory
 #TODO: Replace NameThisDataframe with what is in custom_types.py if you are using pandas
-from repos.{{cookiecutter.project_repo}}.{{cookiecutter.project_slug}}.custom_types import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.custom_types import (
     NameThisDataframe,
 )
-from repos.{{cookiecutter.project_repo}}.{{cookiecutter.project_slug}}.modes import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.modes import (
     dev_mode,
     local_mode,
     prod_mode,
 )
-from repos.{{cookiecutter.project_repo}}.{{cookiecutter.project_slug}}.presets import dev, local, prod
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.presets import dev, local, prod
 
 
 @solid(required_resource_keys={"snowflake"})

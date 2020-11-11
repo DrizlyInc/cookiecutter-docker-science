@@ -1,12 +1,12 @@
 """Presets"""
 from dagster import PresetDefinition
-from repos.forecasts.supplier_forecast.environments.dev_run_config import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.environments.dev_run_config import (
     dev_run_config,
 )
-from repos.forecasts.supplier_forecast.environments.local_run_config import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.environments.local_run_config import (
     local_run_config,
 )
-from repos.forecasts.supplier_forecast.environments.prod_run_config import (
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.environments.prod_run_config import (
     prod_run_config,
 )
 
