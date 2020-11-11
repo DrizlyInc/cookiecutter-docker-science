@@ -1,0 +1,13 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "basic.warning",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "top_subcategory"
+      },
+      "meta": {}
+    }
+  ]
+}

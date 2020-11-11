@@ -1,4 +1,0 @@
-resources:
-  snowflake:
-    config:
-      file_path: test.csv
