@@ -5,6 +5,7 @@ from dagster_ge.factory import ge_validation_solid_factory
 #TODO: Replace NameThisDataframe with what is in custom_types.py if you are using pandas
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.custom_types import (
     NameThisDataframe,
+    NameThisDataframeTransformed,
 )
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.modes import (
     dev_mode,
@@ -52,6 +53,6 @@ def upload_{{cookiecutter.project_slug}}(
 )
 def {{cookiecutter.project_slug}}_pipeline():
     df = get_config_query_from_snowflake()
-    transform_df = {{cookiecutter.project_slug}}(df)
-    {{cookiecutter.project_slug}}_expectations(transform_df)
-    upload_{{cookiecutter.project_slug}}(transform_df)
+    transformed_df = transform_df(df)
+    {{cookiecutter.project_slug}}_expectations(transformed_df)
+    upload_{{cookiecutter.project_slug}}(transformed_df)
