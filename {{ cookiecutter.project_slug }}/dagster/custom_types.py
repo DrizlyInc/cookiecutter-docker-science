@@ -1,4 +1,4 @@
-"""Supplier Custom Types"""
+"""{{cookiecutter.dagster_repo}} Custom Types"""
 from dagster_pandas import PandasColumn, create_dagster_pandas_dataframe_type
 
 {{cookiecutter.project_slug}} = create_dagster_pandas_dataframe_type(
