@@ -18,8 +18,8 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.presets i
 @solid(required_resource_keys={"snowflake"})
 def get_config_query_from_snowflake(context, query: String) -> NameThisDataframe:
     """Load Snowflake Data"""
-    result = context.resources.snowflake.execute_query(query)
-    return pd.DataFrame(result)
+    df = context.resources.snowflake.get_pandas_dataframe(query)
+    return df
 
 @solid(required_resource_keys={"snowflake"})
 def transform_df(context, query: String) -> NameThisDataframeTransformed:
