@@ -1,6 +1,4 @@
-"""Test Supplier Forecast"""
-import unittest
-
+"""Test {{cookiecutter.project_slug}}"""
 import pytest
 from dagster import execute_pipeline, execute_solid
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.main import (
@@ -16,10 +14,10 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.c
 
 
 class Test{{cookiecutter.project_slug}}(unittest.TestCase):
-    """Test Supplier Forecast"""
+    """Test {{cookiecutter.project_slug}}"""
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
-    def test_get_because_you_bought_list(self):
+    def test_{{cookiecutter.project_slug}}_df(self):
         """Store order items"""
         result = execute_solid(
             get_{{cookiecutter.project_slug}}_list,

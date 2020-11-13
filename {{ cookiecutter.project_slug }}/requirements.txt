@@ -11,3 +11,4 @@ sklearn
 python-box
 matplotlib
 pandas_profiling[notebook]
+great_expectations
