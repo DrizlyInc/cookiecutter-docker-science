@@ -112,6 +112,9 @@ start-container: ## start docker container
 	@echo "Launched $(CONTAINER_NAME)..."
 	$(DOCKER) attach $(CONTAINER_NAME)
 
+jupyter-host-no-referrer:
+	jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT} --NotebookApp.disable_check_xsrf=True
+
 jupyter-start: ## start Jupyter Notebook server
 	jupyter-notebook --ip=0.0.0.0 --port=${JUPYTER_CONTAINER_PORT}
 

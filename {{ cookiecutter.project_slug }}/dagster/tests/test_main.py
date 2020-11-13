@@ -1,6 +1,8 @@
 """Test {{cookiecutter.project_slug}}"""
 import pytest
 from dagster import execute_pipeline, execute_solid
+
+#TODO: If you remove or add solids, you'll need to add tests in here accordingly
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.main import (
     get_{{cookiecutter.project_slug}}_df,
     transform_{{cookiecutter.project_slug}}_df,
@@ -13,6 +15,7 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.m
     local_mode,
     test_mode,
 )
+#TODO: If you remove or add custom types, you'll need to add/remove in here accordingly
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.custom_types import (
     {{cookiecutter.project_slug}}TransformedDF,
     {{cookiecutter.project_slug}}DF,
@@ -22,6 +25,7 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.c
 
 import pandas as pd
 
+#TODO: If you remove or add solids, you'll need to add tests in here accordingly
 class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     """Test {{cookiecutter.project_slug}}"""
 
@@ -73,5 +77,10 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         )
         self.assertTrue(result)
 
-
-# TODO: Write the pipeline test
+    @pytest.mark.{{cookiecutter.dagster_repo}}
+    def test_{{cookiecutter.project_slug}}_to_redis_pipeline():
+        res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline)
+        assert res.success
+        assert len(res.solid_result_list) == 4
+        for solid_res in res.solid_result_list:
+            assert solid_res.success

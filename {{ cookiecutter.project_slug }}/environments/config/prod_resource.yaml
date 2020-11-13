@@ -12,4 +12,4 @@ solids:
   get_{{cookiecutter.project_slug}}_df:
     inputs:
       query:
-        value: SELECT key, value FROM PROD.DATASCIENCE.{{cookiecutter.project_slug}}
+        value: select store_order_id,order_id,store_id,store_city,store_state from prod.reporting.store_orders_completed_core limit 10

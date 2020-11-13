@@ -17,6 +17,15 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.c
     {{cookiecutter.project_slug}}TransformedDF,
 )
 
+#TODO: There are many TODOs flagged throughout this project that you will need to
+# configure before your project will run properly.
+# You need to (if you plan on using some of the pandas solids below):
+# 1) Edit the queries in the config directory to pull the data you want
+# 2) Edit the custom types to match the columns from ^ these queries
+# 3) Change test.csv to match the columns in the custom types/output of your queries
+# If you search the project for TODO flags you should find this (except for config files)
+# The project out of the box will pull from PROD.REPORTING.STORE_ORDERS_COMPLETED_CORE to demonstrate a functioning flow
+
 @solid(required_resource_keys={"snowflake"})
 def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutter.project_slug}}DF:
     """Load Snowflake Dataframe"""
@@ -27,7 +36,7 @@ def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutt
 def transform_{{cookiecutter.project_slug}}_df(context, df: {{cookiecutter.project_slug}}DF) -> {{cookiecutter.project_slug}}TransformedDF:
     """Transform Snowflake Dataframe"""
     df = context.resources.snowflake.get_pandas_dataframe(query)
-    transformed_df = df.drop(['recency_rk', 'recommendation_rk'], axis=1)
+    transformed_df = df.drop(['store_city', 'store_state'], axis=1)
     return transformed_df
 
 @solid
@@ -55,10 +64,3 @@ def {{cookiecutter.project_slug}}_to_redis_pipeline():
     {{cookiecutter.project_slug}}_list = {{cookiecutter.project_slug}}_df_to_list(transformed_df)
     write_{{cookiecutter.project_slug}}_to_redis({{cookiecutter.project_slug}}_list)
 
-
-def test_{{cookiecutter.project_slug}}_to_redis_pipeline():
-    res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline)
-    assert res.success
-    assert len(res.solid_result_list) == 4
-    for solid_res in res.solid_result_list:
-        assert solid_res.success
