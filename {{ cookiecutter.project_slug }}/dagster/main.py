@@ -37,6 +37,13 @@ def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutt
     {{cookiecutter.project_slug}}_df = context.resources.snowflake.get_pandas_dataframe(query)
     return {{cookiecutter.project_slug}}_df
 
+# GE solid
+{{ cookiecutter.project_slug }}_expectations = ge_validation_solid_factory(
+    name="{{ cookiecutter.project_slug }}_expectations",
+    datasource_name="pandas",
+    suite_name="basic.warning",
+)
+
 @solid
 def transform_{{cookiecutter.project_slug}}_df(context, df: {{cookiecutter.project_slug}}DF) -> {{cookiecutter.project_slug}}TransformedDF:
     """Transform Snowflake Dataframe"""
@@ -66,6 +73,7 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 )
 def {{cookiecutter.project_slug}}_to_redis_pipeline():
     df = get_{{cookiecutter.project_slug}}_df()
+    {{ cookiecutter.project_slug }}_expectations(df)
     transformed_df = transform_{{cookiecutter.project_slug}}_df(df)
     {{cookiecutter.project_slug}}_list = {{cookiecutter.project_slug}}_df_to_list(transformed_df)
     write_{{cookiecutter.project_slug}}_to_redis({{cookiecutter.project_slug}}_list)

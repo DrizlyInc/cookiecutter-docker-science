@@ -1,6 +1,6 @@
 {
   "data_asset_type": null,
-  "expectation_suite_name": "ratings.table.warning",
+  "expectation_suite_name": "{{cookiecutter.project_slug}}.warning",
   "expectations": [],
   "meta": {
     "great_expectations_version": "0.12.7"

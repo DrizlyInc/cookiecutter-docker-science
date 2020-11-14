@@ -42,7 +42,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
             transform_{{cookiecutter.project_slug}}_df,
             mode_def = test_mode,
             run_config = test_cfg.to_dict(),
-            input_values = {"df": pd.read_csv(get_project_root().joinpath("dagster/tests/test.csv")},
+            input_values = {"df": pd.read_csv(get_project_root().joinpath("dagster/tests/test.csv"))},
         )
         self.assertTrue(result)
 
@@ -73,7 +73,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
-    def test_{{cookiecutter.project_slug}}_to_redis_pipeline():
+    def test_{{cookiecutter.project_slug}}_to_redis_pipeline(self):
         res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline)
         assert res.success
         assert len(res.solid_result_list) == 4
