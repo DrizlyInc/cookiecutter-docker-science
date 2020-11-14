@@ -7,8 +7,8 @@ from drizly_dagster_utils.utils.resources import (
     snowflake,
 )
 from drizly_dagster_utils.utils.slack_logger import json_console_logger
+from dagster_ge.factory import ge_data_context
 
-# TODO: Write up a howto for this portion.
 # Modes are largely used to define things external to the pipeline that are referenced
 # resource_defs points to external resources that may vary by environment.
 # e.g. The common use case here is in prod mode we might reference Snowflake but in
@@ -19,7 +19,7 @@ from drizly_dagster_utils.utils.slack_logger import json_console_logger
 
 local_mode = ModeDefinition(
     name="local",
-    resource_defs={"snowflake": snowflake, "redis": mock_redis},
+    resource_defs={"snowflake": snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
     description="Local mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
@@ -27,20 +27,20 @@ local_mode = ModeDefinition(
 dev_mode = ModeDefinition(
     name="dev",
     description="Dev mode of pipelines (Dev AWS, Dev Resources)",
-    resource_defs={"snowflake": snowflake, "redis": redis},
+    resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
 prod_mode = ModeDefinition(
     name="prod",
     description="Production mode of pipelines (Prod AWS, Prod Resources)",
-    resource_defs={"snowflake": snowflake, "redis": redis},
+    resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
 test_mode = ModeDefinition(
     name="test",
-    resource_defs={"snowflake": mock_snowflake, "redis": mock_redis},
+    resource_defs={"snowflake": mock_snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
     description="Test mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
