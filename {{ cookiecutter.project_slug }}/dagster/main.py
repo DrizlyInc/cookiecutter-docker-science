@@ -60,7 +60,7 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 
 
 @pipeline(
-    mode_defs=filter_modes([local_mode, dev_mode, prod_mode, test_mode]),,
+    mode_defs=filter_modes([local_mode, dev_mode, prod_mode, test_mode]),
     preset_defs=filter_presets([local, dev, prod, test]),
     tags={"type": "{{cookiecutter.dagster_repo}}"},
 )

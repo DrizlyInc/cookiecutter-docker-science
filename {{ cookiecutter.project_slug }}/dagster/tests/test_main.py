@@ -1,5 +1,6 @@
 """Test {{cookiecutter.project_slug}}"""
 import pytest
+import unittest
 from dagster import execute_pipeline, execute_solid
 
 #TODO: If you remove or add solids, you'll need to add tests in here accordingly
@@ -8,20 +9,14 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.m
     transform_{{cookiecutter.project_slug}}_df,
     {{cookiecutter.project_slug}}_df_to_list,
     write_{{cookiecutter.project_slug}}_to_redis,
+    {{cookiecutter.project_slug}}_to_redis_pipeline,
 )
 
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
-    dev_mode,
-    local_mode,
     test_mode,
 )
-#TODO: If you remove or add custom types, you'll need to add/remove in here accordingly
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.custom_types import (
-    {{cookiecutter.project_slug}}TransformedDF,
-    {{cookiecutter.project_slug}}DF,
-)
 
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import test_cfg
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import test_cfg, get_project_root
 
 import pandas as pd
 
@@ -33,7 +28,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     def test_{{cookiecutter.project_slug}}_df(self):
         """{{cookiecutter.project_slug}}"""
         result = execute_solid(
-            get_{{cookiecutter.project_slug}}_list,
+            get_{{cookiecutter.project_slug}}_df,
             mode_def=test_mode,
             run_config=test_cfg.to_dict(),
             input_values={"query": "SELECT 1"},
@@ -41,13 +36,13 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
-    def test_transform_{{cookiecutter.project_slug}}_df(context, df: {{cookiecutter.project_slug}}DF) -> {{cookiecutter.project_slug}}TransformedDF:
+    def test_transform_{{cookiecutter.project_slug}}_df(self):
         """Transform Snowflake Dataframe"""
         result = execute_solid(
             transform_{{cookiecutter.project_slug}}_df,
             mode_def = test_mode,
             run_config = test_cfg.to_dict(),
-            input_values = {"df": pd.read_csv("test.csv")},
+            input_values = {"df": pd.read_csv(get_project_root().joinpath("dagster/tests/test.csv")},
         )
         self.assertTrue(result)
 
@@ -58,7 +53,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
             {{cookiecutter.project_slug}}_df_to_list,
             mode_def = test_mode,
             run_config = test_cfg.to_dict(),
-            input_values = {"df": pd.DataFrame(['1', '2'])},
+            input_values = {"df": pd.DataFrame(['1', '2'], columns = ['store_order_id', 'order_id'])},
         )
         self.assertTrue(result)
 
