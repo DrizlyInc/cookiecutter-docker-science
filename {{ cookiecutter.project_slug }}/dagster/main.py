@@ -39,10 +39,10 @@ def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutt
     return {{cookiecutter.project_slug}}_df
 
 # GE solid
-{{ cookiecutter.project_slug }}_expectations = ge_validation_solid_factory(
-    name="{{ cookiecutter.project_slug }}_expectations",
+{{cookiecutter.project_slug}}_expectations = ge_validation_solid_factory(
+    name="{{cookiecutter.project_slug}}_expectations",
     datasource_name="pandas",
-    suite_name="basic.warning",
+    suite_name="{{cookiecutter.project_slug}}.basic.warning",
 )
 
 @solid
