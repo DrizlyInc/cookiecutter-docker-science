@@ -47,7 +47,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
-    def {{cookiecutter.project_slug}}_df_to_list(context, df: {{cookiecutter.project_slug}}TransformedDF) -> List:
+    def {{cookiecutter.project_slug}}_df_to_list(self):
         """Load Snowflake Data as List and log some information"""
         result = execute_solid(
             {{cookiecutter.project_slug}}_df_to_list,
