@@ -24,23 +24,39 @@ with open(
     "r",
 ) as ymlfile:
     cfg = Box(yaml.safe_load(ymlfile))
+    ge_root_directory = cfg.resources.ge_data_context.config.ge_root_dir
+    cfg.resources.ge_data_context.config.ge_root_dir = (
+        get_project_root().joinpath(f"dagster/{ge_root_directory}").as_posix()
+    )
 
 with open(
     get_project_root().joinpath(f"environments/config/local_resource.yaml"),
     "r",
 ) as ymlfile:
     local_cfg = Box(yaml.safe_load(ymlfile))
+    ge_root_directory = local_cfg.resources.ge_data_context.config.ge_root_dir
+    local_cfg.resources.ge_data_context.config.ge_root_dir = (
+        get_project_root().joinpath(f"dagster/{ge_root_directory}").as_posix()
+    )
 
 with open(
     get_project_root().joinpath(f"environments/config/dev_resource.yaml"), "r"
 ) as ymlfile:
     dev_cfg = Box(yaml.safe_load(ymlfile))
+    ge_root_directory = dev_cfg.resources.ge_data_context.config.ge_root_dir
+    dev_cfg.resources.ge_data_context.config.ge_root_dir = (
+        get_project_root().joinpath(f"dagster/{ge_root_directory}").as_posix()
+    )
 
 with open(
     get_project_root().joinpath(f"environments/config/prod_resource.yaml"),
     "r",
 ) as ymlfile:
     prod_cfg = Box(yaml.safe_load(ymlfile))
+    ge_root_directory = prod_cfg.resources.ge_data_context.config.ge_root_dir
+    prod_cfg.resources.ge_data_context.config.ge_root_dir = (
+        get_project_root().joinpath(f"dagster/{ge_root_directory}").as_posix()
+    )
 
 with open(
     get_project_root().joinpath(f"environments/config/test_resource.yaml"),
@@ -50,4 +66,8 @@ with open(
     file_path = test_cfg.resources.snowflake.config.file_path
     test_cfg.resources.snowflake.config.file_path = (
         get_project_root().joinpath(f"dagster/tests/{file_path}").as_posix()
+    )
+    ge_root_directory = test_cfg.resources.ge_data_context.config.ge_root_dir
+    test_cfg.resources.ge_data_context.config.ge_root_dir = (
+        get_project_root().joinpath(f"dagster/{ge_root_directory}").as_posix()
     )

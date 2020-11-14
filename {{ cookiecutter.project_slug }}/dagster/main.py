@@ -22,6 +22,7 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.c
     {{cookiecutter.project_slug}}TransformedDF,
 )
 import random
+from dagster_ge import ge_validation_solid_factory
 #TODO: There are many TODOs flagged throughout this project that you will need to
 # configure before your project will run properly.
 # You need to (if you plan on using some of the pandas solids below):

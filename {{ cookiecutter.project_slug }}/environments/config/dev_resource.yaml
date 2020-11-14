@@ -3,6 +3,9 @@ resources:
     config:
       secret_name: snowflake/analytics_api
       region: us-east-1
+  ge_data_context:
+    config:
+      ge_root_dir: great_expectations
   redis:
     config:
       host: development-recs-redis.dgvvsn.0001.use1.cache.amazonaws.com
