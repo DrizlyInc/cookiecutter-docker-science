@@ -12,11 +12,16 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.p
     test,
 )
 
+from drizly_dagster_utils.utils.environment_parsing import (
+    filter_modes,
+    filter_presets,
+)
+
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.custom_types import (
     {{cookiecutter.project_slug}}DF,
     {{cookiecutter.project_slug}}TransformedDF,
 )
-
+import random
 #TODO: There are many TODOs flagged throughout this project that you will need to
 # configure before your project will run properly.
 # You need to (if you plan on using some of the pandas solids below):
@@ -55,8 +60,8 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 
 
 @pipeline(
-    mode_defs=[local_mode, dev_mode, prod_mode, test_mode],
-    preset_defs=[local, dev, prod, test],
+    mode_defs=filter_modes([local_mode, dev_mode, prod_mode, test_mode]),,
+    preset_defs=filter_presets([local, dev, prod, test]),
     tags={"type": "{{cookiecutter.dagster_repo}}"},
 )
 def {{cookiecutter.project_slug}}_to_redis_pipeline():
