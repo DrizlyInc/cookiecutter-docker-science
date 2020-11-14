@@ -17,6 +17,5 @@ from dagster_pandas import PandasColumn, create_dagster_pandas_dataframe_type
     columns=[
         PandasColumn("store_order_id"),
         PandasColumn("order_id"),
-        PandasColumn("store_id"),
     ],
 )

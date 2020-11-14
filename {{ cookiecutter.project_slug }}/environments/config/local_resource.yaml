@@ -3,11 +3,6 @@ resources:
     config:
       secret_name: snowflake/analytics_api
       region: us-east-1
-  redis:
-    config:
-      host: localhost
-      port: 6379
-      db: "0"
 solids:
   get_{{cookiecutter.project_slug}}_df:
     inputs:

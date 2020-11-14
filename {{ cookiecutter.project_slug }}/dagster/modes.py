@@ -19,7 +19,7 @@ from drizly_dagster_utils.utils.slack_logger import json_console_logger
 
 local_mode = ModeDefinition(
     name="local",
-    resource_defs={"snowflake": snowflake, "redis": redis},
+    resource_defs={"snowflake": snowflake, "redis": mock_redis},
     description="Local mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
