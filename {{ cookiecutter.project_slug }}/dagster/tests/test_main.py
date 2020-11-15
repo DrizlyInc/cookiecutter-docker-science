@@ -16,8 +16,8 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.m
     test_mode,
 )
 
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import test_cfg, get_project_root
-
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import cfg, get_project_root
+run_config = cfg.to_dict()
 import pandas as pd
 
 #TODO: If you remove or add solids, you'll need to add tests in here accordingly
@@ -30,7 +30,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         result = execute_solid(
             get_{{cookiecutter.project_slug}}_df,
             mode_def=test_mode,
-            run_config=test_cfg.to_dict(),
+            run_config=run_config,
             input_values={"query": "SELECT 1"},
         )
         self.assertTrue(result)
@@ -41,10 +41,16 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         result = execute_solid(
             transform_{{cookiecutter.project_slug}}_df,
             mode_def = test_mode,
-            run_config = test_cfg.to_dict(),
-            input_values = {"df": pd.read_csv(get_project_root().joinpath("dagster/tests/test.csv"))},
+            run_config = run_config,
+            input_values = {"df": pd.DataFrame([1,2,3,4,5],
+                                               columns = ["store_order_id",
+                                                          "order_id",
+                                                          "store_id",
+                                                          "store_city",
+                                                          "store_state"])},
         )
         self.assertTrue(result)
+
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def {{cookiecutter.project_slug}}_df_to_list(self):
@@ -52,7 +58,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         result = execute_solid(
             {{cookiecutter.project_slug}}_df_to_list,
             mode_def = test_mode,
-            run_config = test_cfg.to_dict(),
+            run_config = run_config,
             input_values = {"df": pd.DataFrame(['1', '2'], columns = ['store_order_id', 'order_id'])},
         )
         self.assertTrue(result)
@@ -68,7 +74,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
             write_{{cookiecutter.project_slug}}_to_redis,
             mode_def=test_mode,
             input_values={"{{cookiecutter.project_slug}}_list": records},
-            run_config=test_cfg.to_dict(),
+            run_config=run_config,
         )
         self.assertTrue(result)
 

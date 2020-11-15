@@ -1,7 +1,8 @@
 """Presets"""
 from dagster import PresetDefinition
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import dev_cfg, local_cfg, prod_cfg, test_cfg
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import  local_cfg, cfg
 
+run_config = cfg.to_dict()
 local = PresetDefinition(
     name="local",
     run_config=local_cfg.to_dict(),
@@ -10,18 +11,18 @@ local = PresetDefinition(
 
 dev = PresetDefinition(
     name="dev",
-    run_config=dev_cfg.to_dict(),
+    run_config=run_config,
     mode="dev",
 )
 
 prod = PresetDefinition(
     name="prod",
-    run_config=prod_cfg.to_dict(),
+    run_config=run_config,
     mode="prod",
 )
 
 test = PresetDefinition(
     name="test",
-    run_config=test_cfg.to_dict(),
+    run_config=run_config,
     mode="test",
 )
