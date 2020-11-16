@@ -17,30 +17,32 @@ from dagster_ge.factory import ge_data_context
 # AWS instances of redis, which don't permit local connection, and in order to use
 # a redis connection locally, you would need to stand up your own redis cluster.
 
-local_mode = ModeDefinition(
+local = ModeDefinition(
     name="local",
     resource_defs={"snowflake": snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
     description="Local mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
 
-dev_mode = ModeDefinition(
+dev = ModeDefinition(
     name="dev",
     description="Dev mode of pipelines (Dev AWS, Dev Resources)",
     resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
-prod_mode = ModeDefinition(
+prod = ModeDefinition(
     name="prod",
     description="Production mode of pipelines (Prod AWS, Prod Resources)",
     resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
-test_mode = ModeDefinition(
+test = ModeDefinition(
     name="test",
     resource_defs={"snowflake": mock_snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
     description="Test mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
+
+MODES = [local, dev, prod, test]

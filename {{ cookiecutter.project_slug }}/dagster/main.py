@@ -1,16 +1,6 @@
 from dagster import List, String, execute_pipeline, pipeline, solid
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
-    dev_mode,
-    local_mode,
-    prod_mode,
-    test_mode,
-)
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.presets import (
-    dev,
-    local,
-    prod,
-    test,
-)
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import MODES
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.presets import PRESETS
 
 from drizly_dagster_utils.utils.environment_parsing import (
     filter_modes,
@@ -68,8 +58,8 @@ def write_{{cookiecutter.project_slug}}_to_redis(context, {{cookiecutter.project
 
 
 @pipeline(
-    mode_defs=filter_modes([local_mode, dev_mode, prod_mode, test_mode]),
-    preset_defs=filter_presets([local, dev, prod, test]),
+    mode_defs=filter_modes(MODES),
+    preset_defs=filter_presets(PRESETS),
     tags={"type": "{{cookiecutter.dagster_repo}}"},
 )
 def {{cookiecutter.project_slug}}_to_redis_pipeline():
