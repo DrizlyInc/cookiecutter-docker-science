@@ -35,17 +35,17 @@ You should have run the command and entered the project directory with `cd proje
 ![Alt text](docs/images/cookiecutter_creation.png?raw=true "Cookiecutter Creation")
 
 Then you need to build the image with `make init`:
-![Alt text](docs/images/build docker image.png?raw=true "Create docker image")
+![Alt text](docs/images/build_docker_image.png?raw=true "Create docker image")
 
 Then create the container with `make create-container`
-![Alt text](docs/images/create the container.png?raw=true "Create docker image")
+![Alt text](docs/images/create_the_container.png?raw=true "Run docker image")
 
 Then launch the server within the container with `make jupyter-host-no-referrer`
 and navigate to the url (127.0.0.1) with the token output 
-![Alt text](docs/images/Notebook Server Setup.png?raw=true "Create docker image")
+![Alt text](docs/images/notebook_server_setup.png?raw=true "Set up notebook server")
 
 Then navigate to the notebook directory to get started with EDA 
-![Alt text](docs/images/Notebook Server Setup.png?raw=true "Create docker image")
+![Alt text](docs/images/jupyter_notebook_nav.png?raw=true "Navigate notebook")
 
 It's suggested that you do most of your development in the notebooks, and as you
 finalize your project, migrate your code from notebook form into the {{cookiecutter.project_slug}}
@@ -62,11 +62,12 @@ to run properly right away you need to do the following:
  
 You will have made changes to the queries from the base template and so you 
 need to modify custom_types.py to accommodate your new column names:
-![Alt text](docs/images/custom types.png?raw=true "Setup custom types")
+![Alt text](docs/images/custom_types.png?raw=true "Setup custom types")
 
 Following that, if this is a dagster flow you can (if you haven't already) add your 
 code to the repo.py file in the drizly-dagster repo you are in:
-![Alt text](docs/images/dagster setup.png?raw=true "Setup dagster repo")
+
+![Alt text](docs/images/dagster_setup.png?raw=true "Setup dagster repo")
 
 Then you can run `dagit -w workspace.yml` from the drizly-dagster project root
 and it should load everything you need to run your first dagster flow.
