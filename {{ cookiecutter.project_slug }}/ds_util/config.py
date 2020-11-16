@@ -7,6 +7,8 @@ from box import Box
 # TODO: Figure out how to pass envirorment variables and possibly still support sagemaker SLA
 
 env = os.environ.get("ENV")
+config_dir = "config/"
+
 if env is None:
     env = os.environ.get("DAGSTER_ENVIRONMENT")
 # dev, local, or prod
@@ -20,7 +22,7 @@ def get_project_root() -> Path:
 # You can import cfg from this module ala from config import cfg and access it anywhere
 # in the project
 with open(
-    get_project_root().joinpath(f"config/{env}_resource.yaml"),
+    get_project_root().joinpath(f"{config_dir}{env}_resource.yaml"),
     "r",
 ) as ymlfile:
     cfg = Box(yaml.safe_load(ymlfile))
@@ -36,7 +38,7 @@ with open(
 
 # Loading the default config
 with open(
-    get_project_root().joinpath(f"config/local_resource.yaml"),
+    get_project_root().joinpath(f"{config_dir}local_resource.yaml"),
     "r",
 ) as ymlfile:
     local_cfg = Box(yaml.safe_load(ymlfile))

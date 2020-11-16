@@ -11,4 +11,14 @@ solids:
   get_{{cookiecutter.project_slug}}_df:
     inputs:
       query:
-        value: select store_order_id,order_id,store_id,store_city,store_state from prod.reporting.store_orders_completed_core limit 10
+        value: SELECT user_id,
+          store_id,
+          is_gift,
+          store_state,
+          CEIL(eta_high_actual / 5.0) *5 eta,
+          avg(delivery_minutes) delivery_minutes,
+          sum(store_order_total) store_order_total
+          FROM PROD.REPORTING.STORE_ORDERS_COMPLETED_CORE
+          GROUP BY 1,2,3,4,5
+          ORDER BY RANDOM()
+          LIMIT 100

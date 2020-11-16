@@ -38,7 +38,11 @@ def get_{{cookiecutter.project_slug}}_df(context, query: String) -> {{cookiecutt
 @solid
 def transform_{{cookiecutter.project_slug}}_df(context, df: {{cookiecutter.project_slug}}DF) -> {{cookiecutter.project_slug}}TransformedDF:
     """Transform Snowflake Dataframe"""
-    transformed_df = df.drop(['store_city', 'store_state', 'store_id'], axis=1)
+    transformed_df = df.drop(['store_id',
+                              'is_gift',
+                              'store_state',
+                              'eta',
+                              'delivery_minutes'], axis=1)
     return transformed_df
 
 @solid
