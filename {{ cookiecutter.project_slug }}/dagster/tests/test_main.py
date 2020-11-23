@@ -12,9 +12,7 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.m
     {{cookiecutter.project_slug}}_to_redis_pipeline,
 )
 
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
-    test_mode,
-)
+from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import test as test_mode
 from drizly_dagster_utils.utils.test_utils import add_solid_to_config
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import cfg, get_project_root
 run_config = cfg.to_dict()
@@ -39,12 +37,14 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_transform_{{cookiecutter.project_slug}}_df(self):
         """Transform Snowflake Dataframe"""
-        input_values_dict = {"df": pd.DataFrame([[1,2,3,4,5]],
-                                               columns = ["store_order_id",
-                                                          "order_id",
+        input_values_dict = {"df": pd.DataFrame([[1,2,3,4,5,6,7]],
+                                               columns = ["user_id",
                                                           "store_id",
-                                                          "store_city",
-                                                          "store_state"])}
+                                                          "is_gift",
+                                                          "store_state",
+                                                          "eta",
+                                                          "delivery_minutes",
+                                                          "store_order_total",])}
         result = execute_solid(
             transform_{{cookiecutter.project_slug}}_df,
             mode_def = test_mode,
@@ -57,7 +57,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_{{cookiecutter.project_slug}}_df_to_list(self):
         """Load Snowflake Data as List and log some information"""
-        input_values_dict = {"df": pd.DataFrame([['1', '2']], columns = ['store_order_id', 'order_id'])}
+        input_values_dict = {"df": pd.DataFrame([['1', '2']], columns = ['user_id', 'store_order_total'])}
         result = execute_solid(
             {{cookiecutter.project_slug}}_df_to_list,
             mode_def = test_mode,
@@ -93,6 +93,7 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
         )
         print(res)
         assert res.success
-        assert len(res.solid_result_list) == 4
+        # This should be the number of solids
+        assert len(res.solid_result_list) == 5
         for solid_res in res.solid_result_list:
             assert solid_res.success
