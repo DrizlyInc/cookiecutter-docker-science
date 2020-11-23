@@ -30,6 +30,7 @@ Requirements
 * Python 3.5 or later
 * `Cookiecutter 1.6 or later <https://cookiecutter.readthedocs.io/en/latest/installation.html>`_
 * `Docker version 17 or later <https://docs.docker.com/install/#support>`_
+* `AWS configuration set up. If you can use boto3 you are all set`
 
 Quick start
 -----------
