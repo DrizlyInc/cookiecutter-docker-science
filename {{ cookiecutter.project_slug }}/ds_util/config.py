@@ -17,6 +17,8 @@ if env is None:
 def get_project_root() -> Path:
     return Path(__file__).parent.parent
 
+def update_config_immutable(update_dict:dict) -> dict:
+    updated_box = Box(cfg, default_box=True)
 
 # TODO: Is the environment variable read necessary?
 # You can import cfg from this module ala from config import cfg and access it anywhere

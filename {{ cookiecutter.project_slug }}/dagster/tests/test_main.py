@@ -15,7 +15,7 @@ from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.m
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import (
     test_mode,
 )
-
+from drizly_dagster_utils.utils.test_utils import add_solid_to_config
 from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.ds_util.config import cfg, get_project_root
 run_config = cfg.to_dict()
 import pandas as pd
@@ -27,27 +27,28 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_{{cookiecutter.project_slug}}_df(self):
         """{{cookiecutter.project_slug}}"""
+        solid_name = "get_{{cookiecutter.project_slug}}_df"
+        input_values_dict = {"query": "SELECT 1"}
         result = execute_solid(
             get_{{cookiecutter.project_slug}}_df,
             mode_def=test_mode,
-            run_config=run_config,
-            input_values={"query": "SELECT 1"},
-        )
+            run_config=add_solid_to_config(run_config, solid_name, input_values_dict)),
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_transform_{{cookiecutter.project_slug}}_df(self):
         """Transform Snowflake Dataframe"""
-        result = execute_solid(
-            transform_{{cookiecutter.project_slug}}_df,
-            mode_def = test_mode,
-            run_config = run_config,
-            input_values = {"df": pd.DataFrame([1,2,3,4,5],
+        solid_name = "transform_{{cookiecutter.project_slug}}_df"
+        input_values_dict = {"df": pd.DataFrame([1,2,3,4,5],
                                                columns = ["store_order_id",
                                                           "order_id",
                                                           "store_id",
                                                           "store_city",
-                                                          "store_state"])},
+                                                          "store_state"])}
+        result = execute_solid(
+            transform_{{cookiecutter.project_slug}}_df,
+            mode_def = test_mode,
+            run_config=add_solid_to_config(run_config, solid_name, input_values_dict)),
         )
         self.assertTrue(result)
 
@@ -55,32 +56,35 @@ class Test{{cookiecutter.project_slug}}(unittest.TestCase):
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def {{cookiecutter.project_slug}}_df_to_list(self):
         """Load Snowflake Data as List and log some information"""
+        solid_name = "{{cookiecutter.project_slug}}_df_to_list"
+        input_values_dict = {"df": pd.DataFrame(['1', '2'], columns = ['store_order_id', 'order_id'])}
         result = execute_solid(
             {{cookiecutter.project_slug}}_df_to_list,
             mode_def = test_mode,
-            run_config = run_config,
-            input_values = {"df": pd.DataFrame(['1', '2'], columns = ['store_order_id', 'order_id'])},
+            run_config=add_solid_to_config(run_config, solid_name, input_values_dict)),
         )
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_write_{{cookiecutter.project_slug}}_to_redis(self):
         """Test subcategory forecast"""
-        records = [
+        solid_name = write_{{cookiecutter.project_slug}}_to_redis
+        {"{{cookiecutter.project_slug}}_list":  [
             ("k", "v"),
             ("k2", "v2"),
         ]
+        }
         result = execute_solid(
             write_{{cookiecutter.project_slug}}_to_redis,
             mode_def=test_mode,
-            input_values={"{{cookiecutter.project_slug}}_list": records},
-            run_config=run_config,
+            run_config=add_solid_to_config(run_config, solid_name, input_values_dict)),
         )
         self.assertTrue(result)
 
     @pytest.mark.{{cookiecutter.dagster_repo}}
     def test_{{cookiecutter.project_slug}}_to_redis_pipeline(self):
-        res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline)
+        res = execute_pipeline({{cookiecutter.project_slug}}_to_redis_pipeline,
+                                preset="test",)
         assert res.success
         assert len(res.solid_result_list) == 4
         for solid_res in res.solid_result_list:
