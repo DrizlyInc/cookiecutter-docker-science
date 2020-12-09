@@ -12,7 +12,7 @@ RUN --mount=type=ssh,mode=0666 apt-get update  \
     && apt-get install build-essential -y  \
     && mkdir -p -m 0700 ~/.ssh \
     && ssh-keyscan github.com >> ~/.ssh/known_hosts  \
-    && pip install git+ssh://git@github.com/DrizlyInc/drizly-dagster.git@ds_js/margin-optimized-sort-skeleton"#egg=integrations&subdirectory=drizly_dagster_utils"
+    && pip install git+ssh://git@github.com/DrizlyInc/drizly-dagster.git"#egg=flows-utils&subdirectory=drizly_dagster_utils"
 
 # Allowing configuration changes in nbconfig for extensions
 RUN chmod +x /usr/local/etc/jupyter/nbconfig/

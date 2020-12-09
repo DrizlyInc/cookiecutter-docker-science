@@ -10,7 +10,7 @@ env = os.environ.get("ENV")
 config_dir = "config/"
 
 if env is None:
-    env = os.environ.get("DAGSTER_ENVIRONMENT")
+    env = os.environ.get("DAGSTER_ENVIRONMENT", "local")
 # dev, local, or prod
 
 # This gets you the path object for the root of the project and lets you load files from that
