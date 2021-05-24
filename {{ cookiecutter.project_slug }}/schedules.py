@@ -7,7 +7,7 @@ from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}
     name="{{cookiecutter.project_slug}}",
     cron_schedule="0 12 * * *",
     execution_timezone="UTC",
-    pipeline_name="{{cookiecutter.project_slug}}_pipeline",
+    pipeline_name="{{cookiecutter.project_slug}}_to_snowflake_pipeline",
     run_config=prod_run_config,
     mode="prod",
 )

@@ -1,12 +1,16 @@
 from dagster import List, String, execute_pipeline, pipeline, solid
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.modes import MODES
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.presets import PRESETS
-
-from repos.{{cookiecutter.dagster_repo}}.{{cookiecutter.project_slug}}.dagster.custom_types import (
+from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}.modes import 
+(
+    local,
+    dev,
+    prod,
+)
+from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}.presets import PRESETS
+from repos.{{cookiecutter.dagster_repo}}.solids import write_dataframe_to_snowflake
+from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}.custom_types import (
     {{cookiecutter.project_slug}}DF,
     {{cookiecutter.project_slug}}TransformedDF,
 )
-import random
 from dagster_ge import ge_validation_solid_factory
 #TODO: There are many TODOs flagged throughout this project that you will need to
 # configure before your project will run properly.
@@ -42,7 +46,7 @@ def transform_{{cookiecutter.project_slug}}_df(context, df: {{cookiecutter.proje
 
 
 @pipeline(
-    mode_defs=[local_forecast, dev_forecast, prod_forecast],
+    mode_defs=[local, dev, prod],
     preset_defs=PRESETS,
     tags={"type": "{{cookiecutter.dagster_repo}}"},
 )
@@ -50,5 +54,5 @@ def {{cookiecutter.project_slug}}_to_snowflake_pipeline():
     df = get_{{cookiecutter.project_slug}}_df()
     {{ cookiecutter.project_slug }}_expectations(df)
     transformed_df = transform_{{cookiecutter.project_slug}}_df(df)
-    write_dataframe_to_snowflake(transformed_df, "{{cookiecutter.project_slug}}")
+    write_dataframe_to_snowflake(transformed_df)
 
