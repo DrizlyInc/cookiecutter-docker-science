@@ -1,6 +1,5 @@
 from dagster import List, String, execute_pipeline, pipeline, solid
-from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}.modes import 
-(
+from repos.{{cookiecutter.dagster_repo}}.pipelines.{{cookiecutter.project_slug}}.modes import (
     local,
     dev,
     prod,

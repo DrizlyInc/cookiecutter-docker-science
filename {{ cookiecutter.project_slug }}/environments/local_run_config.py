@@ -4,7 +4,7 @@ local_run_config = {
     "resources": {
         "snowflake": {
             "config": {
-                "file_path": file_relative_path(__file__, "data"),
+                "file_path": file_relative_path(__file__, "../data"),
             }
         },
         "ge_data_context": {
@@ -18,6 +18,9 @@ local_run_config = {
     "solids": {
         "get_{{cookiecutter.project_slug}}_df": {
             "inputs": {"query": {"value": "test.csv"}}
+        },
+    "write_dataframe_to_snowflake": {
+            "inputs": {"table_name": {"value": "schema.table"}}
         },
     },
 }
