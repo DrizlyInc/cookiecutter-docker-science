@@ -1,6 +1,0 @@
-user_id,store_id,is_gift,store_state,eta,delivery_minutes,store_order_total
-3894796,5510,False,NY,35.0,71.000000,32.29
-4705414,1328,False,NY,100.0,203.000000,59.48
-4963750,6220,False,CO,55.0,66.000000,42.85
-14539,4043,False,NY,,19.500000,271.95
-4503149,7025,False,CA,60.0,2.000000,96.18

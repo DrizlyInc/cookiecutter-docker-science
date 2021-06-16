@@ -132,14 +132,6 @@ When you modify the data in local environment, `sync-to-remote` target uploads t
 
 When you see the status of Docker container, please run `make profile` in host machine.
 
-### Use Jupyter Notebook
-
-To launch Jupyter Notebook, please run `make jupyter-start` in the Docker container. After launch the Jupyter Notebook, you can
-access the Jupyter Notebook service in http://localhost:{{ cookiecutter.jupyter_host_port }}.
-
-You will need to put in the token the first time the server is run each container start up (following a make start or make create).
-After that, you can set a password on the prompt page and login with that while the container is running.
-
 ### Run formatter
 When you format project's codes, please run `make format`.
 More details of black in https://github.com/psf/black 

@@ -1,7 +1,0 @@
-resources:
-  snowflake:
-    config:
-      file_path: test.csv
-  ge_data_context:
-    config:
-      ge_root_dir: great_expectations

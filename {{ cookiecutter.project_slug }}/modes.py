@@ -1,12 +1,12 @@
 """Modes"""
 from dagster import ModeDefinition
-from drizly_dagster_utils.utils.resources import (
-    mock_redis,
+from drizly_dagster_utils.resources import (
+    mock_s3,
     mock_snowflake,
-    redis,
+    s3,
     snowflake,
 )
-from drizly_dagster_utils.utils.slack_logger import json_console_logger
+from drizly_dagster_utils.loggers.slack_logger import json_console_logger
 from dagster_ge.factory import ge_data_context
 
 # Modes are largely used to define things external to the pipeline that are referenced
@@ -19,7 +19,7 @@ from dagster_ge.factory import ge_data_context
 
 local = ModeDefinition(
     name="local",
-    resource_defs={"snowflake": snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
+    resource_defs={"snowflake": mock_snowflake, "ge_data_context": ge_data_context},
     description="Local mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
@@ -27,22 +27,20 @@ local = ModeDefinition(
 dev = ModeDefinition(
     name="dev",
     description="Dev mode of pipelines (Dev AWS, Dev Resources)",
-    resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
+    resource_defs={"snowflake": snowflake, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
 prod = ModeDefinition(
     name="prod",
     description="Production mode of pipelines (Prod AWS, Prod Resources)",
-    resource_defs={"snowflake": snowflake, "redis": redis, "ge_data_context": ge_data_context},
+    resource_defs={"snowflake": snowflake, "ge_data_context": ge_data_context},
     logger_defs={"custom_logger": json_console_logger},
 )
 
 test = ModeDefinition(
     name="test",
-    resource_defs={"snowflake": mock_snowflake, "redis": mock_redis, "ge_data_context": ge_data_context},
+    resource_defs={"snowflake": mock_snowflake, "ge_data_context": ge_data_context},
     description="Test mode of pipelines (No AWS, Dev/Local Resources)",
     logger_defs={"custom_logger": json_console_logger},
 )
-
-MODES = [local, dev, prod, test]
